@@ -11,17 +11,17 @@ option(BUILD_SHARED_LIBS "True when building a shared library" True) # add the b
 
 project("Foo")
 
-#set CMAKE_BUILD_TYPE default value
+#set CMAKE_BUILD_TYPE default value. Set Cmake BUILD_TYPE default value to Release
 if(NOT CMAKE_CONFIGURATION_TYPES)
     if("${CMAKE_BUILD_TYPE}" STREQUAL "")
         set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build configuration" FORCE)
     endif()
 endif()
 
-#validate CMAKE_BUILD_TYPE
+#validate CMAKE_BUILD_TYPE: That means check if it's correspond to debug or release for example (see line 8)
 if(NOT CMAKE_CONFIGURATION_TYPES)
     list(FIND VALID_BUILD_TYPES "${CMAKE_BUILD_TYPE}" INDEX)
-    if(${INDEX} MATCHES -1)
+    if(${INDEX} MATCHES -1) # if index equal negative 1 then the value wasn't found in the list
         message(FATAL_ERROR "Invalid build type. Valid types are [${VALID_BUILD_TYPES}]")
     endif()
 endif()
